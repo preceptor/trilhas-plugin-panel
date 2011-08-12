@@ -29,12 +29,12 @@
                     <td>
                         <?php $i = 0; if (count($this->panel)):?>
                             <?php 
-                                
                                 $panelNote = new Tri_Db_Table('panel_note');
                                 $panelNote = new Tri_Db_Table('panel_note');
                                 $forumReply = new Tri_Db_Table('forum_reply');
                                 $certificate = new Tri_Db_Table('certificate');
                                 $activityText = new Tri_Db_Table('activity_text');
+                                $exerciseNote = new Tri_Db_Table('exercise_note');
                             ?>
                             <?php foreach($this->panel as $panel):?>
                                 <?php
@@ -61,8 +61,14 @@
                                     }
 
                                     if ($panel->type == 'exercise') {
-                                        if (isset($note->note) && $note->note > 0) {
-                                            $background = 'background: #D0F5A9';
+                                        $row = $exerciseNote->fetchRow(array('exercise_id = ?' => $panel->item_id,
+                                                                             'user_id = ?' => $user->id), 'id DESC');
+                                        if ($row) {
+                                            if ($row->status == 'waiting') {
+                                                $background = 'background: #F3F781';
+                                            } elseif ($row->status == 'end') {
+                                                $background = 'background: #D0F5A9';
+                                            }
                                         }
                                     }
                                 ?>

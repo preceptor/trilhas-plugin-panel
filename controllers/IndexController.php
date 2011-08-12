@@ -97,6 +97,10 @@ class Panel_IndexController extends Tri_Controller_Action
         $id    = Zend_Filter::filterStatic($this->_getParam('id'), 'int');
 
         if ($id) {
+            if (Tri_Plugin::isInstall('restriction')) {
+                $restriction = new Tri_Db_Table('restriction_panel');
+                $restriction->delete(array('panel_id = ?' => $id));
+            }
             $note->delete(array('panel_id = ?' => $id));
             $table->delete(array('id = ?' => $id));
             $this->_helper->_flashMessenger->addMessage('Success');
