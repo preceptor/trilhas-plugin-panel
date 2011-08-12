@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <name>panel</name>
+    <description>Performance Panel to access' exercises</description>
+    <author>Preceptor Educação a Distância</author>
+    <version>1.0</version>
+    <license>GPL 3</license>
+    <keywords>panel, exercise, note</keywords>
+    <url>http://www.preceptoread.com.br</url>
+    
+    <files>
+        <sql>
+            <install>data/sql/install.sql</install>
+            <uninstall>data/sql/uninstall.sql</uninstall>
+        </sql>
+        <languages>
+            <language name="pt_BR">data/language/pt_BR/panel.csv</language>
+        </languages>
+    </files>
+    
+    <!--
+    <configuration>
+        <item name="notepad_option">valor para gravar na tabela</item>
+    </configuration>
+    -->
+    
+    <menus>
+        <menu type="tri_classroom_menu">
+            <item group="support" resource="painel/index/index">panel</item>    
+        </menu>
+    </menus>
+    
+    <access>
+        <resource role="teacher">panel/index/index</resource>
+        <resource role="teacher">panel/index/form</resource>
+        <resource role="teacher">panel/index/find</resource>
+        <resource role="teacher">panel/index/save</resource>
+        <resource role="teacher">panel/index/delete</resource>
+        <resource role="teacher">panel/index/save-note</resource>
+        <resource role="teacher">panel/index/change</resource>
+        <resource role="teacher">panel/certificate/save</resource>
+        <resource role="teacher">panel/certificate/validate</resource>
+    </access>
+</configuration>
