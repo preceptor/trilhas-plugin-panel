@@ -4,13 +4,13 @@
             <?php echo $this->ajax('Itens', 'panel/index/form', 2); ?>
         </div>
         <div id="user-status">
-            <?php echo $this->formRadio('status',$this->status, null, $this->statusOptions, '&nbsp;&nbsp;')?>
+            <?php echo $this->formRadio('status', $this->status, null, $this->statusOptions, '&nbsp;&nbsp;')?>
         </div>
     <br /><br /><br />
     <?php endif; ?>
     <div class="list">
         <?php if (count($this->data)): ?>
-            <table class="datatable">
+            <table class="zebra-striped">
                 <tr>
                     <th></th>
                     <th><?php echo $this->translate('Note')?></th>
@@ -100,7 +100,7 @@
                     </td>
                     <?php if (Zend_Auth::getInstance()->getIdentity()->role != 'student'):?>
                         <td width="80">
-                            <button class="status-button"><?php echo $this->translate('Change')?></button>
+                            <button class="btn status-button"><?php echo $this->translate('Change')?></button>
                             <div style="display: none;">
                                 <?php
                                     if ($this->status == 'registered') {
@@ -146,13 +146,13 @@
     
     $('.panel .item a').click(function(){
         var $this = $(this);
-        $.get(this.href, function(data){
+        $.get(this.href, function(data) {
+            var $box = $this.parents('.box');
             if (opened) {
-                $this.parents('.box').prev().html(data);
-            } else {
-                $this.parents('.box').before(data);
-                opened = true;
-            }
+                $box.prev().remove();
+            } 
+            $box.before(data);
+            opened = true;
         });
         return false;
     });
@@ -175,7 +175,7 @@
         });
     });
 
-    $('.status-button').button().click(function(){
+    $('.status-button').click(function(){
         $(this).hide().next().show();
     });
 
@@ -184,5 +184,5 @@
         $this.parents('.content').load('panel/index/index/status/'+$this.children('input').val());
     });
 
-    $('input[type=button], input[type=submit]').button();
+    
 </script>
